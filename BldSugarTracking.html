@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Blood Sugar Tracking Log</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      color: #000;
+      text-align: center;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .container {
+      width: 95%;
+      margin: auto;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px gray;
+    }
+
+    h2 {
+      color: #004080;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #000;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #004080;
+      color: white;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea {
+      width: 100%;
+      padding: 5px;
+      box-sizing: border-box;
+    }
+
+   textarea {
+    width: 100%;
+    height: auto;
+    min-height: 50px;
+    max-height: 400px; /* Adjust as needed */
+    overflow-y: hidden;
+    resize: none; /* Prevents manual resizing */
+    font-size: 14px;
+}
+
+
+    .buttons {
+      margin-top: 15px;
+    }
+
+    .buttons button {
+      padding: 10px;
+      margin: 5px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .print {
+      background-color: yellow;
+    }
+
+    .download {
+      background-color: green;
+      color: white;
+    }
+
+    .toggle-dark {
+      background-color: #333;
+      color: white;
+    }
+
+    /* DARK MODE STYLES */
+    .dark-mode {
+      background-color: #121212;
+      color: white;
+    }
+
+    .dark-mode .container {
+      background-color: #222;
+      color: white;
+      box-shadow: none;
+    }
+
+    .dark-mode th {
+      background-color: #007acc;
+    }
+
+    .dark-mode textarea {
+      background-color: #333;
+      color: white;
+    }
+
+    @media print {
+      body {
+        background: none;
+      }
+      .buttons {
+        display: none;
+      }
+      table {
+        page-break-inside: avoid;
+      }
+      /* Ensure checkbox labels align properly on print */
+      td label {
+        display: inline-block;
+        margin-right: 10px;
+        vertical-align: middle;
+      }
+      /* Auto-expand textareas to display all content */
+     
+     @media print {
+           textarea { 
+               display: none; /* Hide textareas */
+           }
+           .print-notes {
+              display: block !important; /* Show converted divs */
+       }
+   }
+
+     @media print {
+         footer {
+             display: block !important;
+             position: relative;
+             bottom: 0;
+             width: 100%;
+             text-align: center;
+             font-size: 12px;
+        }
+     }
+
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Daily Blood Sugar Tracking Log</h2>
+    <label>Select Date: <input type="date" id="datePicker"></label>
+    
+    <table>
+      <tr>
+        <th>Time of Day</th>
+        <th>Blood Sugar (mg/dL)</th>
+        <th>Symptoms (Check Any)</th>
+        <th>Energy (1-10)</th>
+        <th>Mood (1-10)</th>
+        <th>Notes (Food, Sleep, Stress, etc.)</th>
+      </tr>
+      <tr>
+        <td>🌅 Morning (Fasting)</td>
+        <td><input type="text"></td>
+        <td>
+          <label><input type="checkbox"> None</label>
+          <label><input type="checkbox"> Fatigue</label>
+          <label><input type="checkbox"> Headache</label>
+          <label><input type="checkbox"> Cravings</label>
+          <label><input type="checkbox"> Brain Fog</label>
+          <label><input type="checkbox"> Shaky</label>
+          <label><input type="checkbox"> Low Energy</label>
+        </td>
+        <td><input type="number" min="1" max="10"></td>
+        <td><input type="number" min="1" max="10"></td>
+        <td><textarea class="auto-expand"></textarea></td>      </tr>
+      <tr>
+        <td>🍽️ Before Lunch</td>
+        <td><input type="text"></td>
+        <td>
+          <label><input type="checkbox"> None</label>
+          <label><input type="checkbox"> Fatigue</label>
+          <label><input type="checkbox"> Headache</label>
+          <label><input type="checkbox"> Cravings</label>
+          <label><input type="checkbox"> Brain Fog</label>
+          <label><input type="checkbox"> Shaky</label>
+          <label><input type="checkbox"> Low Energy</label>
+        </td>
+      <td><input type="number" min="1" max="10"></td>
+      <td><input type="number" min="1" max="10"></td>
+      <td><textarea class="auto-expand"></textarea></td>
+      </tr>
+      <tr>
+        <td>🍽️ Before Dinner</td>
+        <td><input type="text"></td>
+        <td>
+          <label><input type="checkbox"> None</label>
+          <label><input type="checkbox"> Fatigue</label>
+          <label><input type="checkbox"> Headache</label>
+          <label><input type="checkbox"> Cravings</label>
+          <label><input type="checkbox"> Brain Fog</label>
+          <label><input type="checkbox"> Shaky</label>
+          <label><input type="checkbox"> Low Energy</label>
+        </td>
+        <td><input type="number" min="1" max="10"></td>
+        <td><input type="number" min="1" max="10"></td>
+        <td><textarea class="auto-expand"></textarea></td>      </tr>
+      <tr>
+        <td>🌙 Before Bed</td>
+        <td><input type="text"></td>
+        <td>
+          <label><input type="checkbox"> None</label>
+          <label><input type="checkbox"> Fatigue</label>
+          <label><input type="checkbox"> Headache</label>
+          <label><input type="checkbox"> Cravings</label>
+          <label><input type="checkbox"> Brain Fog</label>
+          <label><input type="checkbox"> Shaky</label>
+          <label><input type="checkbox"> Low Energy</label>
+        </td>
+        <td><input type="number" min="1" max="10"></td>
+        <td><input type="number" min="1" max="10"></td>
+        <td><textarea class="auto-expand"></textarea></td>
+      </tr>
+    </table>
+
+    <p>
+      <strong>Bonus Tip:</strong> Aim for consistent blood sugar levels between <em>80-130 mg/dL before meals</em> and <em>under 180 mg/dL after meals</em> (per ADA guidelines). Adjust your habits based on your trends!
+    </p>
+
+    <div class="buttons">
+      <button class="toggle-dark" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+      <button class="print" onclick="window.print()">Print</button>
+      <button class="download" onclick="downloadPDF()">Download PDF</button>
+    </div>
+  </div>
+
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+    }
+
+    function downloadPDF() {
+      window.print();
+    }
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".auto-expand").forEach(function (textarea) {
+        textarea.style.height = "auto";
+        textarea.style.overflowY = "hidden";
+
+        textarea.addEventListener("input", function () {
+            this.style.height = "auto";
+            this.style.height = this.scrollHeight + "px";
+        });
+    });
+
+    // Convert textareas to divs for printing
+    window.onbeforeprint = function () {
+        document.querySelectorAll(".auto-expand").forEach(function (textarea) {
+            let printDiv = document.createElement("div");
+            printDiv.className = "print-notes";
+            printDiv.innerText = textarea.value;
+            printDiv.style.whiteSpace = "pre-wrap";
+            printDiv.style.border = "1px solid #ccc";
+            printDiv.style.padding = "5px";
+            printDiv.style.minHeight = "50px";
+
+            textarea.style.display = "none"; // Hide textarea
+            textarea.parentNode.insertBefore(printDiv, textarea.nextSibling);
+        });
+    };
+
+    window.onafterprint = function () {
+        document.querySelectorAll(".print-notes").forEach(function (printDiv) {
+            printDiv.previousElementSibling.style.display = "block"; // Show textarea again
+            printDiv.remove(); // Remove print divs
+        });
+    };
+});
+
+
+
+  </script>
+
+<footer style="text-align: center; margin-top: 20px; font-size: 14px;">
+    <p>All rights reserved - <strong>Dr. Dawn Robinson</strong></p>
+    <p>Visit: <a href="https://DrDawnRobinson.com" target="_blank">DrDawnRobinson.com</a></p>
+</footer>
+
+
+</body>
+</html>
+
